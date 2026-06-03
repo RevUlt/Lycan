@@ -1,29 +1,55 @@
 # Lycan Bot
 
-# Environment
+# === Credenciales y secretos (NUNCA commitear) ===
 .env
 .env.docker
+.env.local
+.env.production
+*.key
+*.pem
+*.secret
+
+# === Python ===
 *.pyc
-__pycache__/
 *.pyo
 *.pyd
+__pycache__/
+*.egg-info/
+dist/
+build/
+.eggs/
 
-# Virtual Environment
+# === Entorno virtual ===
 venv/
 .venv/
+env/
 
-# Logs
-logs/*.log
-
-# IDE
-.vscode/
-.idea/
-
-# Docker
+# === Logs ===
+logs/
 *.log
 
-# OS
+# === Docker ===
+.docker/
+
+# === Datos persistentes (no subir al repo) ===
+data/chroma_db/
+data/backups/
+
+# === IDE ===
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# === OS ===
 .DS_Store
 Thumbs.db
+
+# === Credenciales de servicios ===
 config/gdrive-credentials.json
+
+# === Archivos de desarrollo temporal ===
+debug_*.py
+test_*.py
+scratch_*.py
 modules/backup/
