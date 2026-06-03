@@ -1,0 +1,3 @@
+"""
+Lycan Bot - Modules Package
+"""

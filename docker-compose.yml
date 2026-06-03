@@ -1,0 +1,62 @@
+services:
+  lycan:
+    build: .
+    container_name: lycan-bot
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      discord-mcp:
+        condition: service_started
+    env_file:
+      - .env.docker
+    ports:
+      - "7000:7000"
+      - "6100:6100"  # Webhook server for Twitch/YouTube
+    volumes:
+      - ./logs:/app/logs
+      - ./config:/app/config
+      - ./mcp_servers.json:/app/mcp_servers.json:ro
+    networks:
+      - lycan-network
+
+  discord-mcp:
+    build: ./mcp_discord
+    container_name: lycan-discord-mcp
+    restart: unless-stopped
+    env_file:
+      - .env.docker
+    environment:
+      - DISCORD_GUILD_ID=${DISCORD_GUILD_ID:-}
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    # No ports exposed — only reachable internally via lycan-network
+    networks:
+      - lycan-network
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: lycan-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: lycan
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: lycan
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./data/migrations:/docker-entrypoint-initdb.d
+    # No ports exposed — only reachable internally via lycan-network
+    networks:
+      - lycan-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U lycan -d lycan"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+
+networks:
+  lycan-network:
+    driver: bridge

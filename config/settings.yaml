@@ -1,0 +1,14 @@
+# Bot
+bot:
+  prefix: "!"
+  status: "🐺 | /help"
+
+# Módulos activos
+modules:
+  welcome: true
+  embeds: true
+  cleaning: true
+  hub: true
+  socials: true
+  tickets: true
+  auditor: true

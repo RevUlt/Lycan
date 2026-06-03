@@ -1,0 +1,31 @@
+# Core Discord
+discord.py
+PyNaCl
+
+# Database
+asyncpg
+
+# API
+fastapi
+uvicorn
+
+# Config
+python-dotenv
+PyYAML
+
+# HTTP
+aiohttp
+
+# Utils
+
+# AI Module
+chromadb
+google-generativeai
+sentence-transformers
+groq
+mcp
+openai
+
+# Backup Module
+google-api-python-client
+google-auth

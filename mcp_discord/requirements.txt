@@ -1,0 +1,5 @@
+# Lycan Discord MCP Server
+discord.py
+PyNaCl
+aiohttp
+python-dotenv

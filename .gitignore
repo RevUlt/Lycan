@@ -1,0 +1,29 @@
+# Lycan Bot
+
+# Environment
+.env
+.env.docker
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+
+# Virtual Environment
+venv/
+.venv/
+
+# Logs
+logs/*.log
+
+# IDE
+.vscode/
+.idea/
+
+# Docker
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+config/gdrive-credentials.json
+modules/backup/
